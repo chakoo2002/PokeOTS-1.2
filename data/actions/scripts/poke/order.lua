@@ -243,6 +243,7 @@ function onUse(player, item, fromPosition, target, toPosition, isHotkey)
 			elseif rideOutfit == 0 and flyOutfit > 0 then -- fly
 				if flyOutfit > 1 then outfit.lookType = flyOutfit end
 				msg = msg .. ", let me fly on you!"
+				player:sendTextMessage(MESSAGE_STATUS_CONSOLE_BLUE, "Type \"!up\" to fly/levitate higher and \"!down\" to fly/levitate lower.")
 				storage = storageFly
 				if flyOutfit == 1 then
 					outfit.lookType = monsterType:getOutfit().lookType
