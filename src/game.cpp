@@ -3365,11 +3365,12 @@ bool Game::playerYell(Player* player, const std::string& text)
 bool Game::playerSpeakTo(Player* player, SpeakClasses type, const std::string& receiver,
                          const std::string& text)
 {
+	Database* db = Database::getInstance();
 	Player* toPlayer = getPlayerByName(receiver);
 	if (!toPlayer) {//Offline_messages
 		player->sendTextMessage(MESSAGE_STATUS_SMALL, "A player with this name is not online, but message will be saved.");
-		std::string insertQuery = "INSERT INTO `offmsg` (`receiver`, `sender`, `message`) VALUES (" + db.escapeString(receiver) + ", " + db.escapeString(player->getName()) + ", " + db.escapeString(text) + ")";
-		db.executeQuery(insertQuery);
+		std::string insertQuery = "INSERT INTO `offmsg` (`receiver`, `sender`, `message`) VALUES (" + db->escapeString(receiver) + ", " + db->escapeString(player->getName()) + ", " + db->escapeString(text) + ")";
+		db->executeQuery(insertQuery);
 		return false;
 	}
 
@@ -3384,8 +3385,8 @@ bool Game::playerSpeakTo(Player* player, SpeakClasses type, const std::string& r
 
 	if (toPlayer->isInGhostMode() && !player->isAccessPlayer()) {//Offline_messages
 		player->sendTextMessage(MESSAGE_STATUS_SMALL, "A player with this name is not online, but message will be saved.");
-		std::string insertQuery = "INSERT INTO `offmsg` (`receiver`, `sender`, `message`) VALUES (" + db.escapeString(receiver) + ", " + db.escapeString(player->getName()) + ", " + db.escapeString(text) + ")";
-		db.executeQuery(insertQuery);
+		std::string insertQuery = "INSERT INTO `offmsg` (`receiver`, `sender`, `message`) VALUES (" + db->escapeString(receiver) + ", " + db->escapeString(player->getName()) + ", " + db->escapeString(text) + ")";
+		db->executeQuery(insertQuery);
 	} else {
 		std::ostringstream ss;
 		ss << "Message sent to " << toPlayer->getName() << '.';

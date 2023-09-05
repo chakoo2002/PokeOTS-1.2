@@ -31,7 +31,7 @@ function onLogin(player)
 			local messageText = "You have new messages:\n"
 			for _, messageData in pairs(messages) do
 				messageText = messageText .. messageData.message .. "\n"
-				
+				--print(messageText)
 				local messageId = messageData.id
 				local deleteQuery = "DELETE FROM `offmsg` WHERE `id` = " .. messageId
 				db.query(deleteQuery)
