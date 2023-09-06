@@ -1336,6 +1336,7 @@ void ProtocolGame::sendAnimatedMessage(const TextMessage& message) //pota
 	msg.addPosition(message.position);
 	msg.addByte(message.primary.color);
 	msg.addString(message.text);
+	msg.addString(message.font); //chakoo
 	writeToOutputBuffer(msg);
 }
 

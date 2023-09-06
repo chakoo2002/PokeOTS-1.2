@@ -42,6 +42,7 @@ struct TextMessage
 {
 	MessageClasses type = MESSAGE_STATUS_DEFAULT;
 	std::string text;
+	std::string font; //chakoo
 	Position position;
 	struct {
 		int32_t value = 0;

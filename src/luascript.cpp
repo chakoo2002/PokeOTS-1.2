@@ -4551,11 +4551,12 @@ int LuaScriptInterface::luaGameStartRaid(lua_State* L)
 
 int LuaScriptInterface::luaGameSendAnimatedText(lua_State* L) //pota
 {
-	// Game.sendAnimatedText(position, text, color)
+	// Game.sendAnimatedText(position, text, color, font)
 	TextMessage message;
 	message.position = getPosition(L, 1);
 	message.text = getString(L, 2);
 	message.primary.color = getNumber<TextColor_t>(L, 3);
+	message.font = getString(L, 4);
 	if (message.position.x && message.position.y && message.position.z) {
 		SpectatorVec list;
 		g_game.map.getSpectators(list, message.position, false, true);
