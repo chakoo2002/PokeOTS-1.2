@@ -90,12 +90,14 @@ badgeContainer = 38680
 
 waterIds = {493, 4608, 4609, 4610, 4611, 4612, 4613, 4614, 4615, 4616, 4617, 4618, 4619, 4620, 4621, 4622, 4623, 4624, 4625, 7236, 10499, 15401, 15402, 4820, 4821, 4822, 4823, 4824, 4825, 4664, 4665, 4666}
 
+
+--increased //chakoo
 balls = {
 pokeball = {emptyId = 26662, usedOn = 26661, usedOff = 26672, effectFail = 734, effectSucceed = 735, missile = 55, effectRelease = 308, chanceMultiplier = 1.0},
-greatball = {emptyId = 26660, usedOn = 26663, usedOff = 26675, effectFail = 738, effectSucceed = 739, missile = 57, effectRelease = 309, chanceMultiplier = 1.2},
-superball = {emptyId = 26659, usedOn = 26669, usedOff = 26674, effectFail = 736, effectSucceed = 737, missile = 56, effectRelease = 879, chanceMultiplier = 1.3},
-ultraball = {emptyId = 26688, usedOn = 26670, usedOff = 26681, effectFail = 740, effectSucceed = 741, missile = 58, effectRelease = 311, chanceMultiplier = 1.4},
-premierball = {emptyId = 26683, usedOn = 26666, usedOff = 26678, effectFail = 321, effectSucceed = 322, missile = 129, effectRelease = 310, chanceMultiplier = 1.5},
+greatball = {emptyId = 26660, usedOn = 26663, usedOff = 26675, effectFail = 738, effectSucceed = 739, missile = 57, effectRelease = 309, chanceMultiplier = 1.3},
+superball = {emptyId = 26659, usedOn = 26669, usedOff = 26674, effectFail = 736, effectSucceed = 737, missile = 56, effectRelease = 879, chanceMultiplier = 1.8},
+ultraball = {emptyId = 26688, usedOn = 26670, usedOff = 26681, effectFail = 740, effectSucceed = 741, missile = 58, effectRelease = 311, chanceMultiplier = 2.2},
+premierball = {emptyId = 26683, usedOn = 26666, usedOff = 26678, effectFail = 321, effectSucceed = 322, missile = 129, effectRelease = 310, chanceMultiplier = 3.5},
 safariball = {emptyId = 26685, usedOn = 26667, usedOff = 26679, effectFail = 323, effectSucceed = 324, missile = 128, effectRelease = 315, chanceMultiplier = 1.0},
 lamp = {emptyId = 2272, usedOn = 2325, usedOff = 23255, effectFail = 734, effectSucceed = 735, missile = 55, effectRelease = 308, chanceMultiplier = 1.0}
 }
