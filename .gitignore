@@ -1,3 +1,11 @@
 
 *.json
 *.obj
+*.exe
+*.exe
+*.tlog
+*.db
+vc14/.vs/theforgottenserver/v16/.suo
+*.ipch
+*.tlog
+*.pdb

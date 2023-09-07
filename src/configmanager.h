@@ -42,6 +42,7 @@ class ConfigManager
 			WARN_UNSAFE_SCRIPTS,
 			CONVERT_UNSAFE_SCRIPTS,
 			CLASSIC_EQUIPMENT_SLOTS,
+			PACKET_COMPRESSION,
 
 			LAST_BOOLEAN_CONFIG /* this must be the last one */
 		};
