@@ -53,7 +53,8 @@ void ConnectionManager::closeAll()
 			boost::system::error_code error;
 			connection->socket.shutdown(boost::asio::ip::tcp::socket::shutdown_both, error);
 			connection->socket.close(error);
-		} catch (boost::system::system_error&) {
+		}
+		catch (boost::system::system_error&) {
 		}
 	}
 	connections.clear();
@@ -79,7 +80,8 @@ void Connection::close(bool force)
 
 	if (messageQueue.empty() || force) {
 		closeSocket();
-	} else {
+	}
+	else {
 		//will be closed by the destructor or onWriteOperation
 	}
 }
@@ -93,7 +95,8 @@ void Connection::closeSocket()
 			boost::system::error_code error;
 			socket.shutdown(boost::asio::ip::tcp::socket::shutdown_both, error);
 			socket.close(error);
-		} catch (boost::system::system_error& e) {
+		}
+		catch (boost::system::system_error& e) {
 			std::cout << "[Network error - Connection::closeSocket] " << e.what() << std::endl;
 		}
 	}
@@ -121,9 +124,10 @@ void Connection::accept()
 
 		// Read size of the first packet
 		boost::asio::async_read(socket,
-		                        boost::asio::buffer(msg.getBuffer(), NetworkMessage::HEADER_LENGTH),
-		                        std::bind(&Connection::parseHeader, shared_from_this(), std::placeholders::_1));
-	} catch (boost::system::system_error& e) {
+			boost::asio::buffer(msg.getBuffer(), NetworkMessage::HEADER_LENGTH),
+			std::bind(&Connection::parseHeader, shared_from_this(), std::placeholders::_1));
+	}
+	catch (boost::system::system_error& e) {
 		std::cout << "[Network error - Connection::accept] " << e.what() << std::endl;
 		close(FORCE_CLOSE);
 	}
@@ -137,7 +141,8 @@ void Connection::parseHeader(const boost::system::error_code& error)
 	if (error) {
 		close(FORCE_CLOSE);
 		return;
-	} else if (connectionState != CONNECTION_STATE_OPEN) {
+	}
+	else if (connectionState != CONNECTION_STATE_OPEN) {
 		return;
 	}
 
@@ -162,13 +167,14 @@ void Connection::parseHeader(const boost::system::error_code& error)
 	try {
 		readTimer.expires_from_now(boost::posix_time::seconds(CONNECTION_READ_TIMEOUT));
 		readTimer.async_wait(std::bind(&Connection::handleTimeout, std::weak_ptr<Connection>(shared_from_this()),
-		                                    std::placeholders::_1));
+			std::placeholders::_1));
 
 		// Read packet content
 		msg.setLength(size + NetworkMessage::HEADER_LENGTH);
 		boost::asio::async_read(socket, boost::asio::buffer(msg.getBodyBuffer(), size),
-		                        std::bind(&Connection::parsePacket, shared_from_this(), std::placeholders::_1));
-	} catch (boost::system::system_error& e) {
+			std::bind(&Connection::parsePacket, shared_from_this(), std::placeholders::_1));
+	}
+	catch (boost::system::system_error& e) {
 		std::cout << "[Network error - Connection::parseHeader] " << e.what() << std::endl;
 		close(FORCE_CLOSE);
 	}
@@ -182,7 +188,8 @@ void Connection::parsePacket(const boost::system::error_code& error)
 	if (error) {
 		close(FORCE_CLOSE);
 		return;
-	} else if (connectionState != CONNECTION_STATE_OPEN) {
+	}
+	else if (connectionState != CONNECTION_STATE_OPEN) {
 		return;
 	}
 
@@ -191,7 +198,8 @@ void Connection::parsePacket(const boost::system::error_code& error)
 	int32_t len = msg.getLength() - msg.getBufferPosition() - NetworkMessage::CHECKSUM_LENGTH;
 	if (len > 0) {
 		checksum = adlerChecksum(msg.getBuffer() + msg.getBufferPosition() + NetworkMessage::CHECKSUM_LENGTH, len);
-	} else {
+	}
+	else {
 		checksum = 0;
 	}
 
@@ -212,25 +220,28 @@ void Connection::parsePacket(const boost::system::error_code& error)
 				close(FORCE_CLOSE);
 				return;
 			}
-		} else {
+		}
+		else {
 			msg.skipBytes(1);    // Skip protocol ID
 		}
 
 		protocol->onRecvFirstMessage(msg);
-	} else {
+	}
+	else {
 		protocol->onRecvMessage(msg);    // Send the packet to the current protocol
 	}
 
 	try {
 		readTimer.expires_from_now(boost::posix_time::seconds(CONNECTION_READ_TIMEOUT));
 		readTimer.async_wait(std::bind(&Connection::handleTimeout, std::weak_ptr<Connection>(shared_from_this()),
-		                                    std::placeholders::_1));
+			std::placeholders::_1));
 
 		// Wait to the next packet
 		boost::asio::async_read(socket,
-		                        boost::asio::buffer(msg.getBuffer(), NetworkMessage::HEADER_LENGTH),
-		                        std::bind(&Connection::parseHeader, shared_from_this(), std::placeholders::_1));
-	} catch (boost::system::system_error& e) {
+			boost::asio::buffer(msg.getBuffer(), NetworkMessage::HEADER_LENGTH),
+			std::bind(&Connection::parseHeader, shared_from_this(), std::placeholders::_1));
+	}
+	catch (boost::system::system_error& e) {
 		std::cout << "[Network error - Connection::parsePacket] " << e.what() << std::endl;
 		close(FORCE_CLOSE);
 	}
@@ -256,12 +267,13 @@ void Connection::internalSend(const OutputMessage_ptr& msg)
 	try {
 		writeTimer.expires_from_now(boost::posix_time::seconds(CONNECTION_WRITE_TIMEOUT));
 		writeTimer.async_wait(std::bind(&Connection::handleTimeout, std::weak_ptr<Connection>(shared_from_this()),
-		                                     std::placeholders::_1));
+			std::placeholders::_1));
 
 		boost::asio::async_write(socket,
-		                         boost::asio::buffer(msg->getOutputBuffer(), msg->getLength()),
-		                         std::bind(&Connection::onWriteOperation, shared_from_this(), std::placeholders::_1));
-	} catch (boost::system::system_error& e) {
+			boost::asio::buffer(msg->getOutputBuffer(), msg->getLength()),
+			std::bind(&Connection::onWriteOperation, shared_from_this(), std::placeholders::_1));
+	}
+	catch (boost::system::system_error& e) {
 		std::cout << "[Network error - Connection::internalSend] " << e.what() << std::endl;
 		close(FORCE_CLOSE);
 	}
@@ -295,7 +307,8 @@ void Connection::onWriteOperation(const boost::system::error_code& error)
 
 	if (!messageQueue.empty()) {
 		internalSend(messageQueue.front());
-	} else if (connectionState == CONNECTION_STATE_CLOSED) {
+	}
+	else if (connectionState == CONNECTION_STATE_CLOSED) {
 		closeSocket();
 	}
 }

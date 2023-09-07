@@ -3363,7 +3363,7 @@ bool Game::playerYell(Player* player, const std::string& text)
 }
 
 bool Game::playerSpeakTo(Player* player, SpeakClasses type, const std::string& receiver,
-                         const std::string& text)
+	const std::string& text)
 {
 	Database* db = Database::getInstance();
 	Player* toPlayer = getPlayerByName(receiver);
@@ -3376,7 +3376,8 @@ bool Game::playerSpeakTo(Player* player, SpeakClasses type, const std::string& r
 
 	if (type == TALKTYPE_PRIVATE_RED_TO && (player->hasFlag(PlayerFlag_CanTalkRedPrivate) || player->getAccountType() >= ACCOUNT_TYPE_GAMEMASTER)) {
 		type = TALKTYPE_PRIVATE_RED_FROM;
-	} else {
+	}
+	else {
 		type = TALKTYPE_PRIVATE_FROM;
 	}
 
@@ -3387,7 +3388,8 @@ bool Game::playerSpeakTo(Player* player, SpeakClasses type, const std::string& r
 		player->sendTextMessage(MESSAGE_STATUS_SMALL, "A player with this name is not online, but message will be saved.");
 		std::string insertQuery = "INSERT INTO `offmsg` (`receiver`, `sender`, `message`) VALUES (" + db->escapeString(receiver) + ", " + db->escapeString(player->getName()) + ", " + db->escapeString(text) + ")";
 		db->executeQuery(insertQuery);
-	} else {
+	}
+	else {
 		std::ostringstream ss;
 		ss << "Message sent to " << toPlayer->getName() << '.';
 		player->sendTextMessage(MESSAGE_STATUS_SMALL, ss.str());

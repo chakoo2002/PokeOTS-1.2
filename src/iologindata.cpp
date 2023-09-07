@@ -335,7 +335,7 @@ bool IOLoginData::loadPlayer(Player* player, DBResult_ptr result)
 		const time_t skullSeconds = result->getNumber<time_t>("skulltime") - time(nullptr);
 		if (skullSeconds > 0) {
 			//ensure that we round up the number of ticks
-			player->skullTicks = (skullSeconds + 2) * 1000;
+			player->skullTicks = (skullSeconds + 2);
 
 			uint16_t skull = result->getNumber<uint16_t>("skull");
 			if (skull == SKULL_RED) {

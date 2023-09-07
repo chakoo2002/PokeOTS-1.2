@@ -3,10 +3,10 @@
 	<!-- Pokemon Project -->
 
 	<item id="2270" article="an" name="order button">
-		<attribute key="slotType" value="order" />
+		<attribute key="slotType" value="necklace" />
 	</item>
 	<item id="26820" article="a" name="rod">
-		<attribute key="slotType" value="necklace" />
+		<attribute key="slotType" value="ammo" />
 	</item>
 	<item id="38682" article="a" name="rope">
 		<attribute key="slotType" value="ring" />
@@ -19,7 +19,7 @@
 		<attribute key="slotType" value="feet" />
 	</item>
 	<item id="2263" article="an" name="info button">
-		<attribute key="slotType" value="info" />
+		<attribute key="slotType" value="body" />
 	</item>
 
 	<item id="38779" article="a" name="calcium vitamin"/>
@@ -84,8 +84,8 @@
 	<item id="34093" article="an" name="opened door"/>
 
 
-	<item id="26821" article="a" name="dash backpack">
-		<attribute key="containerSize" value="20" />
+	<item id="26821" article="a" name="Inventory">
+		<attribute key="containerSize" value="90" />
 		<attribute key="slotType" value="backpack" />
 	</item>
 	<item id="26760" article="a" name="pkd backpack">
@@ -206,6 +206,7 @@
 	</item>
 	<item id="26661" article="a" name="filled pokeball">
 		<attribute key="weight" value="100" />
+		<attribute key="price" value="500" />
 	</item>
 	<item id="26672" article="a" name="filled pokeball">
 		<attribute key="weight" value="100" />
@@ -385,7 +386,7 @@
 		<attribute key="description" value="A peculiar stone that may cause some pokemon to evolve." />
 	</item>
 
-	<!-- Portraits -->
+	<!-- Portraits 
 
 	<item id="27117" article="a" name="portrait">
 		<attribute key="slotType" value="head" />
@@ -2937,7 +2938,7 @@
 	<item id="28535" article="a" name="portrait">
 		<attribute key="slotType" value="head" />
 	</item>
-
+-->
 	<!-- Corpses -->
 
 	<item id="26862" article="a" name="slain bulbasaur">
@@ -3364,6 +3365,7 @@
 		<attribute key="weight" value="20000" />
 		<attribute key="decayTo" value="0" />
 		<attribute key="duration" value="600" />
+		<attribute key="price" value="5000" />
 		<attribute key="corpseType" value="blood" />
 	</item> 
 	<item id="26933" article="a" name="slain tentacool">
@@ -9499,7 +9501,12 @@
 	<item fromid="108" toid="109" name="flowers" />
 	<item id="194" name="dirt" />
 	<item id="231" name="sand" />
+	
+	<!-- Tutorial -->
 	<item id="280" name="earth ground" />
+	 
+	 
+	 
 	<item id="293" name="grass">
 		<attribute key="floorchange" value="down" />
 	</item>
@@ -9604,7 +9611,7 @@
 	<item id="29489" name="stairs">
 		<attribute key="floorchange" value="down" />
 	</item>
-	<item id="460" name="nothing special" />
+	<item id="460" name="" />
 	<item id="461" article="a" name="closed trapdoor" />
 	<item id="462" article="an" name="open trapdoor">
 		<attribute key="floorchange" value="down" />
@@ -10898,9 +10905,8 @@
 		<attribute key="maxTextLen" value="1023" />
 	</item>
 	<item id="1949" article="a" name="scroll">
-		<attribute key="description" value="It is rewriteable." />
-		<attribute key="writeable" value="1" />
-		<attribute key="maxTextLen" value="1023" />
+		<attribute key="description" value="Gold" />
+		<attribute key="writeable" value="0" />
 	</item>
 	<item id="1950" article="a" name="book">
 		<attribute key="maxTextLen" value="1023" />

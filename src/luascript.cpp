@@ -4551,7 +4551,7 @@ int LuaScriptInterface::luaGameStartRaid(lua_State* L)
 
 int LuaScriptInterface::luaGameSendAnimatedText(lua_State* L) //pota
 {
-	// Game.sendAnimatedText(position, text, color, font)
+	// Game.sendAnimatedText(position, text, color, font)  --chakoo
 	TextMessage message;
 	message.position = getPosition(L, 1);
 	message.text = getString(L, 2);
