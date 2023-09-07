@@ -3,23 +3,20 @@
 	<!-- Pokemon Project -->
 
 	<item id="2270" article="an" name="order button">
-		<attribute key="slotType" value="necklace" />
+		<attribute key="slotType" value="body" />
 	</item>
 	<item id="26820" article="a" name="rod">
-		<attribute key="slotType" value="ammo" />
+		<attribute key="weaponType" value="shield" />
 	</item>
 	<item id="38682" article="a" name="rope">
-		<attribute key="slotType" value="ring" />
-	</item>
-	<item id="38681" article="a" name="coin counter">
 		<attribute key="slotType" value="legs" />
 	</item>
 	<item id="38680" article="a" name="badge bag">
 		<attribute key="containerSize" value="16" />
-		<attribute key="slotType" value="feet" />
+		<attribute key="slotType" value="necklace" />
 	</item>
 	<item id="2263" article="an" name="info button">
-		<attribute key="slotType" value="body" />
+		<attribute key="slotType" value="ring" />
 	</item>
 
 	<item id="38779" article="a" name="calcium vitamin"/>

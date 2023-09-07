@@ -114,11 +114,11 @@ function onHealthChange(creature, attacker, primaryDamage, primaryType, secondar
 
 	if math.random(1, 100) <= criticalProbability then
 		localDamageMultiplier = localDamageMultiplier * 1.5
-		Game.sendAnimatedText(creature:getPosition(), "CRITICAL", TEXTCOLOR_RED)
+		Game.sendAnimatedText(creature:getPosition(), "verdana-11px-rounded", "CRITICAL", TEXTCOLOR_RED)
 	else
 		if math.random(1, 100) <= blockedProbability then
 			localDamageMultiplier = 0.0
-			Game.sendAnimatedText(creature:getPosition(), "BLOCKED", TEXTCOLOR_LIGHTGREY)
+			Game.sendAnimatedText(creature:getPosition(), "verdana-11px-rounded", "BLOCKED", TEXTCOLOR_LIGHTGREY)
 		end
 	end
 

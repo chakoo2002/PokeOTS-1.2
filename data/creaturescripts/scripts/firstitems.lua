@@ -1,4 +1,4 @@
-local firstItems = {8922, 1988}
+local firstItems = {1988, 8922}
 local name = "Pikachu"
 --local portraitId = 27141
 
@@ -8,7 +8,7 @@ function onLogin(player)
 			player:addItem(firstItems[i], 1)
 		end
 		-- Check slots	
-		player:addSlotItems()
+		--player:addSlotItems()
 --		player:addItem(player:getSex() == 0 and 2651 or 2650, 1)
 --		player:addItem(1987, 1):addItem(2674, 1)
 		local monsterType = MonsterType(name)
@@ -16,7 +16,7 @@ function onLogin(player)
 		local maxHealth = math.floor(baseHealth * statusGainFormula(player:getLevel(), 1, 0, 0))
 		local backpack = player:getSlotItem(CONST_SLOT_BACKPACK)
 		local addPokeball = backpack:addItem(26661, 1)
---		player:addItem(27141, 1, false, 1, CONST_SLOT_HEAD)
+		player:addItem(38682, 1, false, 1, CONST_SLOT_AMMO)
 		if addPokeball then
 			addPokeball:setSpecialAttribute("pokeName", name)
 			addPokeball:setSpecialAttribute("pokeLevel", 1)

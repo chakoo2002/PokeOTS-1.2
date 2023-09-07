@@ -143,7 +143,7 @@ function onLogin(player)
 	end
 
 	-- Check slots
-	player:addSlotItems()
+	--player:addSlotItems()
 
 	-- No pokes are being used
 --	local balls = player:getPokeballs()

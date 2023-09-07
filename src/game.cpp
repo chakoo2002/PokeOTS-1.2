@@ -3914,6 +3914,7 @@ bool Game::combatChangeHealth(Creature* attacker, Creature* target, CombatDamage
 			}
 
 			TextMessage message;
+			message.font = "verdana-11px-rounded";
 			message.position = targetPos;
 			message.primary.value = realHealthChange;
 			message.primary.color = TEXTCOLOR_MAYABLUE;
