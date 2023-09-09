@@ -496,9 +496,15 @@ class Game
 
 		Item* getUniqueItem(uint16_t uniqueId);
 		bool addUniqueItem(uint16_t uniqueId, Item* item);
+		bool addRealItem(uint32_t RealId, Item* item);
+		Item* getItemByRealUID(uint32_t realUID);
 		void removeUniqueItem(uint16_t uniqueId);
 		void reloadCommands() {
 			commands.reload();
+		}
+		uint32_t lastItemId = 0;
+		uint32_t nextItemUID() {
+			return ++lastItemId;
 		}
 
 		Groups groups;
@@ -522,6 +528,7 @@ class Game
 		std::unordered_map<std::string, Player*> mappedPlayerNames;
 		std::unordered_map<uint32_t, Guild*> guilds;
 		std::unordered_map<uint16_t, Item*> uniqueItems;
+		std::unordered_map<uint32_t, Item*> RealItems;
 		std::map<uint32_t, uint32_t> stages;
 
 		std::list<Item*> decayItems[EVENT_DECAY_BUCKETS];

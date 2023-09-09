@@ -3914,7 +3914,7 @@ bool Game::combatChangeHealth(Creature* attacker, Creature* target, CombatDamage
 			}
 
 			TextMessage message;
-			message.font = "verdana-11px-rounded";
+			message.font = "verdana-11px-rounded"; //chakoo
 			message.position = targetPos;
 			message.primary.value = realHealthChange;
 			message.primary.color = TEXTCOLOR_MAYABLUE;
@@ -5601,11 +5601,28 @@ Item* Game::getUniqueItem(uint16_t uniqueId)
 	return it->second;
 }
 
+Item* Game::getItemByRealUID(uint32_t realUID) {
+	auto it = RealItems.find(realUID);
+	if (it != RealItems.end()) {
+		return it->second;
+	}
+	return nullptr;
+}
+
 bool Game::addUniqueItem(uint16_t uniqueId, Item* item)
 {
 	auto result = uniqueItems.emplace(uniqueId, item);
 	if (!result.second) {
 		std::cout << "Duplicate unique id: " << uniqueId << std::endl;
+	}
+	return result.second;
+}
+
+bool Game::addRealItem(uint32_t RealId, Item* item)
+{
+	auto result = RealItems.emplace(RealId, item);
+	if (!result.second) {
+		std::cout << "Duplicate Real id: " << RealId << std::endl;
 	}
 	return result.second;
 }

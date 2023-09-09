@@ -559,6 +559,9 @@ class LuaScriptInterface
 		static int luaGameStartRaid(lua_State* L);
 
 		static int luaGameSendAnimatedText(lua_State* L); //pota
+		static int luaGameGetItemByRUID(lua_State* L);
+		static int luaInternalGetThing(lua_State* L);
+		static int luaInternalGetCylinder(lua_State* L);
 
 		// Variant
 		static int luaVariantCreate(lua_State* L);
@@ -689,6 +692,7 @@ class LuaScriptInterface
 		static int luaItemGetUniqueId(lua_State* L);
 		static int luaItemGetActionId(lua_State* L);
 		static int luaItemSetActionId(lua_State* L);
+		static int luaItemGetRealUID(lua_State* L);
 
 		static int luaItemGetCount(lua_State* L);
 		static int luaItemGetCharges(lua_State* L);

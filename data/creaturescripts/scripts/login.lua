@@ -28,7 +28,7 @@ function onLogin(player)
 		result.free(msgQuery)
 
 		if #messages > 0 then
-			local messageText = "You have new messages:\n"
+			local messageText = ""
 			for _, messageData in pairs(messages) do
 				messageText = messageText .. messageData.message .. "\n"
 				--print(messageText)
@@ -36,13 +36,13 @@ function onLogin(player)
 				local deleteQuery = "DELETE FROM `offmsg` WHERE `id` = " .. messageId
 				db.query(deleteQuery)
 			end
-			player:sendTextMessage(MESSAGE_STATUS_CONSOLE_BLUE, messageText)
+			player:sendExtendedOpcode(200, messageText)
 		end
 			---///OFFLINE MESSAGES///---
 
 		loginStr = string.format("Sua ultima visita foi em %s.", os.date("%a %b %d %X %Y", player:getLastLoginSaved()))
 	end
-	player:sendTextMessage(MESSAGE_STATUS_DEFAULT, loginStr)
+	player:sendExtendedOpcode(MESSAGE_STATUS_DEFAULT, loginStr)
 
 	-- Stamina
 	nextUseStaminaTime[player.uid] = 0
@@ -65,6 +65,8 @@ function onLogin(player)
 	player:registerEvent("PlayerDeath")
 	player:registerEvent("DropLoot")
 	player:registerEvent("MonsterHealthChange")
+	player:registerEvent("ExtendedOpcode")
+	player:registerEvent("tooltips")
 
 	-- Update questlog
 	player:updateQuestLog()
@@ -143,7 +145,7 @@ function onLogin(player)
 	end
 
 	-- Check slots
-	--player:addSlotItems()
+	player:addSlotItems()
 
 	-- No pokes are being used
 --	local balls = player:getPokeballs()

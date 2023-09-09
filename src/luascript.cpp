@@ -1428,6 +1428,7 @@ void LuaScriptInterface::registerFunctions()
 	registerEnum(CLIENTOS_OTCLIENT_WINDOWS)
 	registerEnum(CLIENTOS_OTCLIENT_MAC)
 
+	registerEnum(ITEM_ATTRIBUTE_REALID)
 	registerEnum(ITEM_ATTRIBUTE_NONE)
 	registerEnum(ITEM_ATTRIBUTE_ACTIONID)
 	registerEnum(ITEM_ATTRIBUTE_UNIQUEID)
@@ -1871,6 +1872,7 @@ void LuaScriptInterface::registerFunctions()
 
 	registerMethod("Game", "startRaid", LuaScriptInterface::luaGameStartRaid);
 	registerMethod("Game", "sendAnimatedText", LuaScriptInterface::luaGameSendAnimatedText); //pota
+	registerMethod("Game", "getItemByRUID", LuaScriptInterface::luaGameGetItemByRUID);
 
 	// Variant
 	registerClass("Variant", "", LuaScriptInterface::luaVariantCreate);
@@ -1992,6 +1994,8 @@ void LuaScriptInterface::registerFunctions()
 	// Item
 	registerClass("Item", "", LuaScriptInterface::luaItemCreate);
 	registerMetaMethod("Item", "__eq", LuaScriptInterface::luaUserdataCompare);
+
+	registerMethod("Item", "getRealUID", LuaScriptInterface::luaItemGetRealUID);
 
 	registerMethod("Item", "isItem", LuaScriptInterface::luaItemIsItem);
 
@@ -2141,6 +2145,9 @@ void LuaScriptInterface::registerFunctions()
 	// Player
 	registerClass("Player", "Creature", LuaScriptInterface::luaPlayerCreate);
 	registerMetaMethod("Player", "__eq", LuaScriptInterface::luaUserdataCompare);
+
+	registerMethod("Player", "internalGetThing", LuaScriptInterface::luaInternalGetThing);
+	registerMethod("Player", "internalGetCylinder", LuaScriptInterface::luaInternalGetCylinder);
 
 	registerMethod("Player", "isPlayer", LuaScriptInterface::luaPlayerIsPlayer);
 
@@ -4570,6 +4577,72 @@ int LuaScriptInterface::luaGameSendAnimatedText(lua_State* L) //pota
 	return 1;
 }
 
+int LuaScriptInterface::luaGameGetItemByRUID(lua_State* L)
+{
+	// Game.getItemByRUID()
+	uint32_t realUID = getNumber<uint32_t>(L, 1);
+	Item* item = g_game.getItemByRealUID(realUID);
+
+	if (item) {
+		// Push the item as a userdata onto the Lua stack
+		pushUserdata<Item>(L, item);
+		setItemMetatable(L, -1, item);
+	}
+	else {
+		lua_pushnil(L);
+	}
+
+	return 1;
+}
+int LuaScriptInterface::luaInternalGetThing(lua_State* L)
+{
+	// player:internalGetThing(thingPos, stackPos, spriteId, stackId)
+	Player* player = getUserdata<Player>(L, 1);
+	if (!player) {
+		lua_pushnil(L);
+		return 1;
+	}
+	const Position& thingPos = getPosition(L, 2);
+	//should check if its sane position
+
+	int32_t stackPos = getNumber<int32_t>(L, 3);
+	if (!stackPos)
+		stackPos = 0;
+
+	int32_t spriteId = getNumber<int32_t>(L, 4);
+	if (!spriteId)
+		spriteId = 0;
+
+	stackPosType_t stackId = getNumber<stackPosType_t>(L, 5);
+	if (!stackId)
+		stackId = STACKPOS_TOPDOWN_ITEM;
+
+	Thing* thing = g_game.internalGetThing(player, thingPos, stackPos, spriteId, stackId);
+	if (thing)
+		pushThing(L, thing);
+	else
+		lua_pushnil(L);
+	return 1;
+}
+int LuaScriptInterface::luaInternalGetCylinder(lua_State* L)
+{
+	// player:internalGetCylinder(thingPos)
+	Player* player = getUserdata<Player>(L, 1);
+	if (!player) {
+		lua_pushnil(L);
+		return 1;
+	}
+	const Position& thingPos = getPosition(L, 2);
+	//should check if its sane position
+
+	Cylinder* thing = g_game.internalGetCylinder(player, thingPos);
+	if (thing)
+		pushThing(L, thing);
+	else
+		lua_pushnil(L);
+	return 1;
+}
+
 // Variant
 int LuaScriptInterface::luaVariantCreate(lua_State* L)
 {
@@ -6070,6 +6143,18 @@ int LuaScriptInterface::luaItemGetActionId(lua_State* L)
 	if (item) {
 		lua_pushnumber(L, item->getActionId());
 	} else {
+		lua_pushnil(L);
+	}
+	return 1;
+}
+
+int LuaScriptInterface::luaItemGetRealUID(lua_State* L)
+{
+	Item* item = getUserdata<Item>(L, 1);
+	if (item) {
+		lua_pushnumber(L, item->getRealUID());
+	}
+	else {
 		lua_pushnil(L);
 	}
 	return 1;

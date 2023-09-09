@@ -1327,7 +1327,7 @@ void ProtocolGame::sendTextMessage(const TextMessage& message)
 			msg.addByte(message.primary.color);
 			msg.add<uint32_t>(message.secondary.value);
 			msg.addByte(message.secondary.color);
-			msg.addString(message.font); //chakoo
+			msg.addString(message.font); // chakoo
 			break;
 		}
 		case MESSAGE_HEALED:

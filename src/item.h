@@ -98,6 +98,7 @@ enum AttrTypes_t {
 	ATTR_HITCHANCE = 32,
 	ATTR_SHOOTRANGE = 33,
 	ATTR_SPECIAL = 34,
+	ATTR_REALUID = 35,
 };
 
 enum Attr_ReadValue {
@@ -739,6 +740,19 @@ class Item : virtual public Thing
 		bool isRemoved() const {
 			return !parent || parent->isRemoved();
 		}
+
+		uint32_t realUID;
+
+		uint32_t realUId = 0;
+		void setRealUID(uint32_t uid) {
+			realUID = uid;
+
+		}
+
+		uint32_t getRealUID() const {
+			return realUID;
+		}
+
 
 	protected:
 		std::string getWeightDescription(uint32_t weight) const;
