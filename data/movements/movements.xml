@@ -37,6 +37,8 @@
 	<movevent event="StepIn" itemid="10403" script="sendtutorial.lua" />
 	<movevent event="StepIn" itemid="10401" script="sendtutorial.lua" />
 	<movevent event="StepIn" fromid="26796" toid="26811" script="sendtutorial.lua" /> Pokeball -->
+	<!--chakoo-->
+	<!--<movevent event="StepIn" itemid="460" script="areatest.lua" />-->
 	<movevent event="StepIn" actionid="100" script="premium_tile.lua" />
 	<movevent event="StepIn" actionid="101" script="legendary_tile.lua" />
 	<movevent event="StepIn" actionid="102" script="teleporttc.lua" />
