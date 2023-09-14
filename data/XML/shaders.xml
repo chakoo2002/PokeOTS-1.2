@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shaders>
+    <shader id="1" name="outfit_rainbow" premium="no" />
+    <shader id="2" name="outfit_stars" premium="no" />
+    <shader id="3" name="outfit_blue_energy" premium="no" />
+    <shader id="4" name="outfit_red_energy" premium="no" />
+    <shader id="5" name="outfit_purple_energy" premium="no" />
+    <shader id="6" name="outfit_green_energy" premium="no" />
+    <shader id="7" name="outfit_blood" premium="no" />
+    <shader id="8" name="outfit_sun" premium="no" />
+    <shader id="9" name="outfit_gold" premium="no" />
+    <shader id="10" name="outfit_circle" premium="no" />
+    <shader id="11" name="outfit_line" premium="no" />
+    <shader id="12" name="outfit_3line" premium="no" />
+    <shader id="13" name="outfit_shine" premium="no" />
+    <shader id="14" name="outfit_ice" premium="no" />
+    <shader id="15" name="outfit_brazil" premium="no" />
+    <shader id="16" name="outfit_camouflage" premium="no" />
+    <shader id="17" name="outfit_cosmos" premium="no" />
+    <shader id="18" name="outfit_glitch" premium="no" />
+    <shader id="19" name="outfit_purpleneon" premium="no" />
+    <shader id="20" name="outfit_purplesky" premium="no" />
+    <shader id="21" name="outfit_shimmering" premium="no" />
+    <shader id="22" name="outfit_static" premium="no" />
+    <shader id="23" name="outfit_sweden" premium="no" />
+    <shader id="24" name="outfit_outline_rainbow" premium="no" />
+    <shader id="25" name="outfit_outline_red" premium="no" />
+    <shader id="26" name="Smooth Blue Outline" premium="no" />
+    <shader id="27" name="Smooth Red Outline" premium="no" />
+    <shader id="28" name="Smooth Green Outline" premium="no" />
+    <shader id="29" name="Smooth Purple Outline" premium="no" />
+</shaders>

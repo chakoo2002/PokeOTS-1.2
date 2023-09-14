@@ -115,6 +115,9 @@ void Game::setGameState(GameState_t newState)
 
 			quests.loadFromXml();
 			mounts.loadFromXml();
+			auras.loadFromXml();
+			wings.loadFromXml();
+			shaders.loadFromXml();
 
 			loadMotdNum();
 			loadPlayersRecord();
@@ -3123,14 +3126,14 @@ void Game::playerRequestOutfit(uint32_t playerId)
 	player->sendOutfitWindow();
 }
 
-void Game::playerToggleMount(uint32_t playerId, bool mount)
-{
+void Game::playerToggleOutfitExtension(uint32_t playerId, int mount, int wings, int aura, int shader) {
 	Player* player = getPlayerByID(playerId);
 	if (!player) {
 		return;
 	}
 
-	player->toggleMount(mount);
+	if (mount != -1)
+		player->toggleMount(mount == 1);
 }
 
 void Game::playerChangeOutfit(uint32_t playerId, Outfit_t outfit)
@@ -3167,6 +3170,38 @@ void Game::playerChangeOutfit(uint32_t playerId, Outfit_t outfit)
 		}
 	} else if (player->isMounted()) {
 		player->dismount();
+	}
+	if (outfit.lookWings != 0) {
+		Wing* wing = wings.getWingByID(outfit.lookWings);
+		if (!wing) {
+			return;
+		}
+
+		if (!player->hasWing(wing)) {
+			return;
+		}
+	}
+
+	if (outfit.lookAura != 0) {
+		Aura* aura = auras.getAuraByID(outfit.lookAura);
+		if (!aura) {
+			return;
+		}
+
+		if (!player->hasAura(aura)) {
+			return;
+		}
+	}
+
+	if (outfit.lookShader) {
+		Shader* shader = shaders.getShaderByID(outfit.lookShader);
+		if (!shader) {
+			return;
+		}
+
+		if (!player->hasShader(shader)) {
+			return;
+		}
 	}
 
 	if (player->canWear(outfit.lookType, outfit.lookAddons)) {
@@ -3914,7 +3949,7 @@ bool Game::combatChangeHealth(Creature* attacker, Creature* target, CombatDamage
 			}
 
 			TextMessage message;
-			message.font = "verdana-11px-rounded"; //chakoo
+			message.font = "newfont-16px-rounded_cp1250"; //chakoo
 			message.position = targetPos;
 			message.primary.value = realHealthChange;
 			message.primary.color = TEXTCOLOR_MAYABLUE;
@@ -4017,6 +4052,7 @@ bool Game::combatChangeHealth(Creature* attacker, Creature* target, CombatDamage
 
 					if (tmpPlayer == attackerPlayer && attackerPlayer != targetPlayer) {
 						message.type = MESSAGE_DAMAGE_DEALT;
+
 						message.text = ucfirst(target->getNameDescription()) + " loses " + damageString + " mana due to your attack.";
 					} else if (tmpPlayer == targetPlayer) {
 						message.type = MESSAGE_DAMAGE_RECEIVED;
@@ -4134,6 +4170,7 @@ bool Game::combatChangeHealth(Creature* attacker, Creature* target, CombatDamage
 					}
 				} else {
 					message.type = MESSAGE_DAMAGE_OTHERS;
+					message.font = "newfont-16px-rounded_cp1250";
 					// TODO: Avoid copying spectatorMessage everytime we send to a spectator
 					message.text = spectatorMessage;
 				}

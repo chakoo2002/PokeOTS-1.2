@@ -651,6 +651,18 @@ static constexpr int32_t PSTRG_OUTFITS_RANGE_SIZE = 500;
 static constexpr int32_t PSTRG_MOUNTS_RANGE_START = (PSTRG_RESERVED_RANGE_START + 2001);
 static constexpr int32_t PSTRG_MOUNTS_RANGE_SIZE = 10;
 static constexpr int32_t PSTRG_MOUNTS_CURRENTMOUNT = (PSTRG_MOUNTS_RANGE_START + 10);
+//[2012 - 2022];
+static constexpr int32_t PSTRG_WINGS_RANGE_START = (PSTRG_RESERVED_RANGE_START + 2012);
+static constexpr int32_t PSTRG_WINGS_RANGE_SIZE = 10;
+static constexpr int32_t PSTRG_WINGS_CURRENTWINGS = (PSTRG_WINGS_RANGE_START + 10);
+//[2023 - 2033];
+static constexpr int32_t PSTRG_AURAS_RANGE_START = (PSTRG_RESERVED_RANGE_START + 2023);
+static constexpr int32_t PSTRG_AURAS_RANGE_SIZE = 10;
+static constexpr int32_t PSTRG_AURAS_CURRENTAURA = (PSTRG_AURAS_RANGE_START + 10);
+//[2034 - 2044];
+static constexpr int32_t PSTRG_SHADERS_RANGE_START = (PSTRG_RESERVED_RANGE_START + 2034);
+static constexpr int32_t PSTRG_SHADERS_RANGE_SIZE = 10;
+static constexpr int32_t PSTRG_SHADERS_CURRENTSHADER = (PSTRG_SHADERS_RANGE_START + 10);
 
 #define IS_IN_KEYRANGE(key, range) (key >= PSTRG_##range##_START && ((key - PSTRG_##range##_START) <= PSTRG_##range##_SIZE))
 
