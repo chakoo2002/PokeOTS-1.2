@@ -40,7 +40,12 @@ function onPostDeath(creature, corpse, killer, mostDamage, unjustified, mostDama
 				local itemName = item:getName()
 				local itemCount = item:getCount()
 				msg = msg .. itemCount .. " " .. itemName .. ", "
+				 if(getFreeSlotsFromContainer(player:getSlotItem(CONST_SLOT_BACKPACK)) <= 0) then
+				local depot = player:getInbox()
+				depot:addItem(itemId, itemCount, INDEX_WHEREEVER, FLAG_NOLIMIT)
+				else
 				player:addItem(itemId, itemCount)
+				end
 				item:remove()
 				nItems = nItems + 1
 				if isInArray(stones, itemName) then

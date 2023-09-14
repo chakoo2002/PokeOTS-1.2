@@ -84,7 +84,7 @@ storageItemQuestItem = 91017
 storageItemQuestTime = 91018
 storageItemQuestDifficulty = 91019
 
-slotItems = {38680, 38681, 38682, 2263, 2270, 26820}
+slotItems = {38680, 38682, 2263, 2270, 26820}
 badgesPortraits = {26614, 26609, 26615, 26612, 26613, 26616, 26610, 26611, 38689, 38683, 38685, 38690, 38684, 38688, 38686, 38687}
 badgeContainer = 38680
 
@@ -3356,4 +3356,28 @@ function Player:getCatchRemainNumber(table)
 		end
 	end
 	return catchRemain
+end
+
+function getFreeSlotsFromContainer(item) -- by Musztang
+    local slots = 0
+    local containers = {}
+
+    if not item then return false end
+    if item:isContainer() then
+        table.insert(containers, item)
+    end
+    while #containers > 0 do
+        local firstContainer = containers[1]
+        if(firstContainer) then
+            for i = firstContainer:getSize() - 1, 0, -1 do
+                local item = firstContainer:getItem(i)
+                if item:isContainer() then
+                    table.insert(containers, item)
+                end
+            end
+        end
+        slots = slots + (firstContainer:getCapacity() - firstContainer:getSize())
+        table.remove(containers, 1)
+    end
+    return slots
 end
