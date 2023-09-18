@@ -1,9 +1,20 @@
 function Player:onBrowseField(position)
 	return true
 end
+function generateRandomHexColor()
+  local hexChars = "0123456789ABCDEF"
+  local color = "#"
+  
+  for _ = 1, 6 do
+    local randomIndex = math.random(1, #hexChars)
+    color = color .. string.sub(hexChars, randomIndex, randomIndex)
+  end
+  
+  return color
+end
 
 function Player:onLook(thing, position, distance)
-	local description = "You see " .. thing:getDescription(distance)
+	local description = "You see {"..generateRandomHexColor().."|"..thing:getDescription(distance).."}"
 	if not thing:isItem() and isSummon(thing) then
 		local master = thing:getMaster()
 		if master:isPlayer() then
@@ -13,7 +24,7 @@ function Player:onLook(thing, position, distance)
 			local pokeBoost = item:getSpecialAttribute("pokeBoost") or 0
 			local pokeLove = item:getSpecialAttribute("pokeLove") or 0
 			if pokeName ~= nil and pokeLevel ~= nil then			
-				description = string.format("%s\nIt belongs to %s. Level: %s. Boost: +%s. Health: %s. Attack: %s. Magic Attack: %s. Magic Defense: %s. Armor: %s. Speed: %s.\n Love: %s.", description, master:getName(), pokeLevel, pokeBoost, thing:getTotalHealth(), thing:getTotalMeleeAttack(), thing:getTotalMagicAttack(), thing:getTotalMagicDefense(), thing:getTotalDefense(), thing:getTotalSpeed(), pokeLove)
+				description = string.format("%s\nIt belongs to %s.\nLevel: {#f2f542|%s}.\nBoost: +{#f5b642|%s}.\nHealth: {#f54254|%s}.\nAttack: {#63615c|%s}.\nMagic Attack: {#755496|%s}.\nMagic Defense: {#965482|%s}.\nArmor: {#5a578c|%s}.\nSpeed: {#6ca0a3|%s}.\n Love: {#d615a9|%s}.", description, master:getName(), pokeLevel, pokeBoost, thing:getTotalHealth(), thing:getTotalMeleeAttack(), thing:getTotalMagicAttack(), thing:getTotalMagicDefense(), thing:getTotalDefense(), thing:getTotalSpeed(), pokeLove)
 			end
 		end
 	end
@@ -32,7 +43,7 @@ function Player:onLook(thing, position, distance)
 			healthStr = "It is fainted."
 		end
 		if pokeName ~= nil and pokeLevel ~= nil and healthStr ~= nil then			
-			description = string.format("%s\nIt contains a %s. Level: %s. Boost: +%s. %s", description, pokeName, pokeLevel, pokeBoost, healthStr)
+			description = string.format("%s\nIt contains a %s. Level: {#f2f542|%s}. Boost: +{#f5b642|%s}. %s", description, pokeName, pokeLevel, pokeBoost, healthStr)
 		end
 	end
 	if thing:isPlayer() and thing ~= self then
@@ -97,7 +108,7 @@ function Player:onLook(thing, position, distance)
 			description, position.x, position.y, position.z
 		)
 	end
-	self:sendTextMessage(MESSAGE_INFO_DESCR, description)
+	self:sendExtendedOpcode(231, description)
 end
 
 function Player:onLookInBattleList(creature, distance)
@@ -110,7 +121,7 @@ function Player:onLookInBattleList(creature, distance)
 		local pokeName = master:getName()
 		local pokeLevel = creature:getLevel()
 		if pokeName ~= nil and pokeLevel ~= nil then			
-			description = string.format("%s\nIt belongs to %s. Level: %s.", description, master:getName(), pokeLevel)
+			description = string.format("%s\nIt belongs to %s. Level: {#f2f542|%s}.", description, master:getName(), pokeLevel)
 		end
 	end
 	if self:getGroup():getAccess() then
@@ -146,7 +157,7 @@ function Player:onLookInTrade(partner, item, distance)
 			healthStr = "It is fainted."
 		end
 		if pokeName ~= nil and pokeLevel ~= nil and healthStr ~= nil then			
-			description = string.format("%s\nIt contains a %s. Level: %s. Boost: +%s. Love: +%s. %s", description, pokeName, pokeLevel, pokeBoost, pokeLove, healthStr)
+			description = string.format("%s\nIt contains a %s. Level: {#f2f542|%s}. Boost: +{#f5b642|%s}. Love: +%s. %s", description, pokeName, pokeLevel, pokeBoost, pokeLove, healthStr)
 		end
 	end
 	self:sendTextMessage(MESSAGE_INFO_DESCR, description)
